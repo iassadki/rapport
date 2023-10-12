@@ -116,6 +116,7 @@ Cette commande retourne
 ``` shell 
 root@serveur-correction:/# cat /etc/shadow | grep -vE ’:\*:|:!\*:’
 ```
+![image commande UNIX](https://iassadki.github.io/rapport/images/etc.shadow.png)
 Cette commande retourne
 
 
@@ -124,7 +125,7 @@ Cette commande retourne
 ``` shell 
 root@serveur-correction:/# cat /etc/passwd | grep -vE ’nologin|sync’
 ```
-![image commande UNIX](https://iassadki.github.io/rapport/images/cat.etc.passwd.1.jpg)
+![image commande UNIX](https://iassadki.github.io/rapport/images/etc.passwd.jpg)
 Cette commande retourne
 
 ###
@@ -132,7 +133,7 @@ Cette commande retourne
 ``` shell 
 root@serveur-correction:/# fdisk -l 
 ```
-![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-l1.jpg)
+![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-l.jpg)
 Cette commande retourne
 
 ``` shell
