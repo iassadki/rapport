@@ -108,7 +108,7 @@ Cette commande retourne le nom de domaine de la machine
 root@serveur-correction:/# cat /etc/apt/sources.list | grep -v -E ’^#|^$’
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/sourceslist.png)
-Cette commande retourne 
+Cette commande retourne le fichier qui référence toutes ls sources utilisées par l'utilitaire APT pour telecharger des paquets
 
 
 ###
