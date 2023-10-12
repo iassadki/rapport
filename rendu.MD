@@ -1,11 +1,5 @@
 ## Rapport TP01
-<!-- nom machine : **ilias-debian** -->
-<!-- domaine : **ufr-info-p6.jussieu.fr** -->
-<!-- ufr-info-p6-jusieu.fr:3128 -->
-<!-- bookworm - Stable -->
-<!-- deb-ilias -->
-<!-- user : root -->
-<!-- mdp : debilias -->
+
 ___
 D'abord, executer ces commandes pour lancer la VM
 ```shell
@@ -45,12 +39,14 @@ Il faut ensuite redemarrer le systeme de la VM pour que les modifications soient
 ##### 2.2 Connection
 Avant de se conneter, il faut lancer la commande **`ip a`**, pour voir l'adresse de la machine, et pouvoir ensuite prendre cette adresse pour s'y connecter.
 ![image commande UNIX](https://iassadki.github.io/rapport/images/ipa.jpg)
+L'adresse IP de la machine est a la ligne `inet 10.20.0.26`
 
 Pour se connecter a sa machine hôte, on lance la commande 
 ```shell
 ssh root@10.20.0.26 
 ```
 `10.20.0.26 (adresse ip de la machine virtuelle)`
+`
 
 ##### 2.3 Nombre de paquets
 Lancement de la commande 
@@ -66,7 +62,6 @@ Il doit y avoir 320 paquets. Ici, il y'en a **331**
 root@serveur-correction:/# df -h
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/df-h.jpg)
-Cette commande retourne l'intégralité des disques et partitions présents sur la machine hôte.  
 `
 
 ##### 2.5 A indiquer dans le rendu et expliquer les commandes et le resultat obtenu
@@ -82,7 +77,7 @@ La commande ci dessus retourne la variable d'environnement LANG, qui définit la
 root@serveur-correction:/# env 
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/env.jpg)
-La commande env retourne toutes les variables d'environnement du système hôte, sous forme de  :
+La commande env retourne toutes les variables d'environnement du système, sous forme de  :
 NOM_VARIABLE=VALEUR_VARIABLE
 
 ###
@@ -133,23 +128,22 @@ Cette commande retourne les utilisateurs n'ayant pas l'attibut de compte nologin
 ``` shell 
 root@serveur-correction:/# fdisk -l 
 ```
-![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-l.jpg)
-Cette commande retourne les c
+![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-ll.jpg)
+Cette commande retourne les partitions du système.
 
 ``` shell
 root@serveur-correction:/# fdisk -x
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-x.jpg)
 
-Cette commande retourne
+Cette commande retourne les partitions du système, d'une façon plus détaillée, aevc des informations sur le disque principal, son type d'etiquette,  un tableau donnant le périphériques, les secteurs, des ID unique ainsi que des id unique des types des partitions. 
 
 ###
 - expliquer le retour de la commande : df -h
 ``` shell 
 root@serveur-correction:/# df -h
-PHOTO
 ```
-retour
+Cette commande retourne l'intégralité des disques et partitions présents sur la machine.  
 
 
 ---
