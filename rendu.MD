@@ -56,13 +56,14 @@ Lancement de la commande
 root@serveur-correction:/# dpkg -l | wc -l
 331
 ```
-Il doit y avoir 320 paquets. Ici, il y'en a 331
+Il doit y avoir 320 paquets. Ici, il y'en a **331**
 
 ##### 2.4 Space usage
 ```shell
 root@serveur-correction:/# df -h
-PHOTO
 ```
+![image commande UNIX](https://iassadki.github.io/rapport/images/df -h.jpg)
+
 
 ##### 2.5 A indiquer dans le rendu et expliquer les commandes et le resultat obtenu
 
