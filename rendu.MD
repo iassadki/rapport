@@ -168,6 +168,7 @@ Le mot de passe à bien été changé
 
 ##### 3.3 Redimentionnement partition
 Voici comment redimensionner sa partition racine sans avoir a tout reinstaller : 
+Ordre 
 ...
 
 
