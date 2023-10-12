@@ -108,7 +108,7 @@ Cette commande retourne le nom de domaine de la machine
 root@serveur-correction:/# cat /etc/apt/sources.list | grep -v -E ’^#|^$’
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/sourceslist.png)
-Cette commande retourne le fichier qui référence toutes ls sources utilisées par l'utilitaire APT pour telecharger des paquets
+Cette commande retourne le fichier qui référence toutes les sources utilisées par l'utilitaire APT pour telecharger des paquets. Ici, on va retourner la liste des sources de paquets actifs du fichier, donc les lignes non commentées
 
 
 ###
@@ -117,7 +117,7 @@ Cette commande retourne le fichier qui référence toutes ls sources utilisées 
 root@serveur-correction:/# cat /etc/shadow | grep -vE ’:\*:|:!\*:’
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/etc.shadow.png)
-Cette commande retourne
+Cette commande retourne la liste de mots de passes actifs dans ma machine. Ici, on a le mot de passe haché de **root**. Ici, le mot de passe est haché et salé.
 
 
 ###
@@ -126,7 +126,7 @@ Cette commande retourne
 root@serveur-correction:/# cat /etc/passwd | grep -vE ’nologin|sync’
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/etc.passwd.jpg)
-Cette commande retourne
+Cette commande retourne les utilisateurs n'ayant pas l'attibut de compte nologin ou sync. Ces derniers sont des comptes de service, qui sont crées et utilisés par des applications, des services ou des opérations bas-niveau, pour interagir avec le système d'exploitation. Ce sont des comptes sur lesquels on ne peut pas se connecter.  
 
 ###
 - expliquer le retour des commandes : fdisk -l et fdisk -x
@@ -134,7 +134,7 @@ Cette commande retourne
 root@serveur-correction:/# fdisk -l 
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-l.jpg)
-Cette commande retourne
+Cette commande retourne les c
 
 ``` shell
 root@serveur-correction:/# fdisk -x
