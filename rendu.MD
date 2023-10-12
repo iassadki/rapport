@@ -7,7 +7,6 @@ ls /usr/VirtualBox/LicencePro2023/LicencePro2023-PreInstalled
 Vbox LicencePro2023-PreInstalled
 ID de la VM : root root
 ```
-keygen
 
 ---
 #### 2 Post-Installation
@@ -22,11 +21,9 @@ cd /etc/apt/ ; touch apt.conf ; echo "Aqcuire::http:proxy "http://proxy.ufr-info
 ```  
 Cette commande ci-dessus permet de metre en place le proxy mis en place par l'université
 
-Pour pouvoir se connecter en **ssh** a sa machine distante depuis sa machine locale, il faut qu'on ait accès a certaines informations. Il faut donc exécutuer ces commandes dans l'ordre : `ip a` : Pour avoir l'adresse ip de la machine et pouvoir s'y connecter. 
-**PHOTO**
-`cd /etc/ssh ; nano sshd_config`
+Pour pouvoir se connecter en **ssh** a sa machine distante depuis sa machine locale, il faut qu'on ait accès a certaines informations. Il faut donc exécutuer ces commandes dans l'ordre : `ip a` : Pour avoir l'adresse ip de la machine et pouvoir s'y connecter, ensuite `cd /etc/ssh ; nano sshd_config`, fichier de configuration de **ssh**.
 
-Il faut decommenter cette ligne du fichier : 
+Il faut décommenter cette ligne du fichier : 
 ``` shell
 #PermitRootLogin prohibitpassword 
 ```
@@ -37,7 +34,7 @@ PermitRootLogin yes
 Il faut ensuite redemarrer le systeme de la VM pour que les modifications soient prise en compte. Donc il faut lancer la commande **`systemctl restart ssh`**
 
 ##### 2.2 Connection
-Avant de se conneter, il faut lancer la commande **`ip a`**, pour voir l'adresse de la machine, et pouvoir ensuite prendre cette adresse pour s'y connecter.
+Avant de se connecter, il faut lancer la commande **`ip a`**, pour voir l'adresse de la machine, et pouvoir ensuite prendre cette adresse pour s'y connecter.
 ![image commande UNIX](https://iassadki.github.io/rapport/images/ipa.jpg)
 L'adresse IP de la machine est a la ligne `inet 10.20.0.26`
 
@@ -129,7 +126,7 @@ Cette commande retourne les utilisateurs n'ayant pas l'attibut de compte nologin
 root@serveur-correction:/# fdisk -l 
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-ll.jpg)
-Cette commande retourne les partitions du système.
+Cette commande retourne les partitions du disque dur du système.
 
 ``` shell
 root@serveur-correction:/# fdisk -x
@@ -168,8 +165,54 @@ Le mot de passe à bien été changé
 
 ##### 3.3 Redimentionnement partition
 Voici comment redimensionner sa partition racine sans avoir a tout reinstaller : 
-Ordre 
-...
+Ordre à respecter
+```shell
+root@serveur-correction:/# df -h
+root@serveur-correction:/# fdisk -l /dev/sda # affichage des détails de la partition
+root@serveur-correction:/# umount / # démontage de la partition 
+root@serveur-correction:/# fdisk -l /dev/sda 
+Commande (m pour l'aide) : p
+Disque /dev/sda : 8 GiB, ... octets, ... secteurs
+Unités : secteur de 1 × ... = ... octets
+Taille de secteur (logique / physique) : ... octets / ... octets
+taille d E/S (minimale / optimale) : ... octets / ... octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0xid_du_disque
+Device     Boot    Start      End  Sectors  Size Id Type
+/dev/sda1           2048 14682111 14680064    6G 83 Linux
+
+root@serveur-correction:/# fdisk /dev/sda 
+Commande (m pour l'aide) : d # pour detruire la partition en question
+Numéro de partition (1,2, 2 par défaut) : 1
+Commande (m pour l'aide) : n
+Type de partition
+   p   primaire (0 primaire, 0 étendue, 4 libre)
+   e   étendue (conteneur pour partitions logiques)
+Sélectionnez (p par défaut) : p
+Numéro de partition (1-4, 1 par défaut) : 1
+Premier secteur (2048-16777215, 2048 par défaut) : 2048
+Dernier secteur, +secteurs ou +taille{K,M,G,T,P} (2048-16777215, 16777215 par défaut) : +7G
+ 
+Une nouvelle partition 1 de type « Linux » et de taille 7 GiB a été créée.
+
+Commande (m pour l'aide) : w
+La table de partitions a été altérée.
+Appel d'ioctl() pour relire la table de partitions.
+Échec de relecture de la table de partitions.: Périphérique ou ressource occupé
+
+## Le systeme doit etre redemarré pour que le noyau relise  
+# et applique la nouvelle table de partition. Il faut ensuite faire un un fsck sur la prochaine réinitialisation, qui rendra la partition saine avant son montage.
+
+touch /forcefsck
+init 6
+resize2fs /dev/sda1
+
+# enfin, lancer la commande 
+df -h # pour verifier ses disques
+
+```
+
+Ilias ASSADKI
 
 
 
