@@ -43,7 +43,9 @@ PermitRootLogin yes
 Il faut ensuite redemarrer le systeme de la VM pour que les modifications soient prise en compte. Donc il faut lancer la commande **`systemctl restart ssh`**
 
 ##### 2.2 Connection
-Avant de se conneter, il faut lancer la commande ip a, pour voir l'adresse de la machine, et pouvoir ensuite prendre cette adresse pour s'y connecter.
+Avant de se conneter, il faut lancer la commande **`ip a`**, pour voir l'adresse de la machine, et pouvoir ensuite prendre cette adresse pour s'y connecter.
+![image commande UNIX](https://iassadki.github.io/rapport/images/ipa.jpg)
+
 Pour se connecter a sa machine hôte, on lance la commande 
 ```shell
 ssh root@10.20.0.26 
@@ -57,28 +59,31 @@ root@serveur-correction:/# dpkg -l | wc -l
 331
 ```
 Il doit y avoir 320 paquets. Ici, il y'en a **331**
+`
 
 ##### 2.4 Space usage
 ```shell
 root@serveur-correction:/# df -h
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/df-h.jpg)
-<!-- ![image commande UNIX](https://images.unsplash.com/photo-1695653422536-d1e9d449ce7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80) -->
-
+Cette commande retourne l'intégralité des disques et partitions présents sur la machine hôte.  
+`
 
 ##### 2.5 A indiquer dans le rendu et expliquer les commandes et le resultat obtenu
 
-###
 - locales : echo $LANG 
 ``` shell 
 root@serveur-correction:/# echo $LANG
 fr_FR.UTF-8
 ```
+La commande ci dessus retourne la variable d'environnement LANG, qui définit la langue et la configuration de la langue. Ici, on utilisé une configuration en français avec l'encodage UTF-8.
 - aide : commande env + Google ou DuckDuckGo
 ``` shell 
 root@serveur-correction:/# env ...
-PHOTO
 ```
+![image commande UNIX](https://iassadki.github.io/rapport/images/env.jpg)
+La commande env retourne toutes les variables d'environnement du système hôte, sous forme de  :
+NOM_VARIABLE=VALEUR_VARIABLE
 
 ###
 - nom machine : hostname
@@ -91,46 +96,51 @@ Le nom de la machine est : serveur-correction
 ###
 - domaine : a l’aide du man de la commande hostname trouver comment afficher votre domain
 ``` shell 
-root@serveur-correction:/# domain ...
-output... DC
+root@serveur-correction:/# hostname -f
+serveur-correction
 ```
-retour
+Cette commande retourne le nom de domaine de la machine
 
 ###
 - verification emplacement depots : cat /etc/apt/sources.list | grep 
 -v -E ’^#|^$’
 ``` shell 
 root@serveur-correction:/# cat /etc/apt/sources.list | grep -v -E ’^#|^$’
-PHOTO
 ```
-retour
+![image commande UNIX](https://iassadki.github.io/rapport/images/sourceslist.png)
+Cette commande retourne 
+
 
 ###
 - passwd/shadow : cat /etc/shadow | grep -vE ’:\*:|:!\*:’
 ``` shell 
 root@serveur-correction:/# cat /etc/shadow | grep -vE ’:\*:|:!\*:’
-PHOTO
 ```
-retour
+Cette commande retourne
 
 
 ###
-- compte utilisateurs : cat /etc/passwd | grep -vE ’nologin|sync’
+- compte utilisateurs : cat /etc/passwd | grep -vE ’nologin|sync’ 
 ``` shell 
 root@serveur-correction:/# cat /etc/passwd | grep -vE ’nologin|sync’
-PHOTO
 ```
-retour
+![image commande UNIX](https://iassadki.github.io/rapport/images/cat.etc.passwd.1.jpg)
+Cette commande retourne
 
 ###
 - expliquer le retour des commandes : fdisk -l et fdisk -x
 ``` shell 
 root@serveur-correction:/# fdisk -l 
-PHOTO
-root@serveur-correction:/# fdisk -x
-PHOTO
 ```
-retour
+![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-l1.jpg)
+Cette commande retourne
+
+``` shell
+root@serveur-correction:/# fdisk -x
+```
+![image commande UNIX](https://iassadki.github.io/rapport/images/fdisk-x.jpg)
+
+Cette commande retourne
 
 ###
 - expliquer le retour de la commande : df -h
