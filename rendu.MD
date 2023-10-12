@@ -79,7 +79,7 @@ fr_FR.UTF-8
 La commande ci dessus retourne la variable d'environnement LANG, qui définit la langue et la configuration de la langue. Ici, on utilisé une configuration en français avec l'encodage UTF-8.
 - aide : commande env + Google ou DuckDuckGo
 ``` shell 
-root@serveur-correction:/# env ...
+root@serveur-correction:/# env 
 ```
 ![image commande UNIX](https://iassadki.github.io/rapport/images/env.jpg)
 La commande env retourne toutes les variables d'environnement du système hôte, sous forme de  :
