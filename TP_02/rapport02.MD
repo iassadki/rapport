@@ -91,6 +91,7 @@ PHOTO
 
 ``` shell
 root^serveur-correction:~# ps aux | wc -l
+ps -eo user,pid,%cpu,%mem,stat,start,time,command | head -n5
 PHOTO
 ```
 
