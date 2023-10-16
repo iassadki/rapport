@@ -60,8 +60,9 @@ htop
 
 ## 2 Processus
 ##### 2.1 Exercice : Etude des processus UNIX
-1. A l’aide de la commande ps, afficher la liste de tous les processus tournant sur votre
-machine, avec les informations suivantes 
+
+*1. A l’aide de la commande ps, afficher la liste de tous les processus tournant sur votre machine, avec les informations suivantes*
+
 ``` shell
 ps aux # afficher la liste de tous les processus tournant sur votre machine
 ```
@@ -92,9 +93,20 @@ PHOTO
 ``` shell
 root^serveur-correction:~# ps aux | wc -l
 ps -eo user,pid,%cpu,%mem,stat,start,time,command | head -n5
+ps -eo user,pid,%cpu,%mem,stat,start,time,command --sort=-%cpu | head -n5
+
 PHOTO
 ```
 
+*2 - Sous UNIX, chaque processus (excepte le premier) est cree par un autre processus, son processus pere. Le processus pere d’un processus est identifie par son PPID (Parent PID).*
+
+– Trouver une option de la commande ps permettant d’afficher le PPID d’un processus.
+
+– Donner la liste ordonnee de tous les processus ancetres de la commande ps en cours d’execution.
+
+*3 - Reprendre la question precedente avec la commande pstree.*
+
+Vous devrez sans doute installer ce package : voir apt update ; apt search ; apt install.
 
 
 trier avec top 
