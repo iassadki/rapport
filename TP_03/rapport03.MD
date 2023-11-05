@@ -87,7 +87,7 @@ echo "Le fichier $fichier est un $type, accessible par $USER en $droits"
 Ecrire un script bash listedir.sh permettant d’afficher le contenu d’un repertoire en separant 
 les fichiers et les (sous) repertoires.
 Exemple d’utilisation :
-$ ./listdir.sh /boot
+###### $ ./listdir.sh /boot
 % affichera :
 % ####### fichier dans /boot/
 % /boot/config-3.16.0-4-amd64
@@ -142,6 +142,7 @@ Resoudre ce probleme en utilisant cut (avec les bons arguments) au lieu de cat. 
 ```shell
 #!/bin/bash
 
+echo "Liste des utilisateurs avec un UID supérieur à 100 :"
 # Utilisation de cut pour extraire le nom d'utilisateur (champ 1) et l'UID (champ 3)
 for user in $(cut -d: -f1,3 /etc/passwd); do
     # Utilisation de awk pour séparer le nom d'utilisateur et l'UID
@@ -149,51 +150,47 @@ for user in $(cut -d: -f1,3 /etc/passwd); do
     uid=$(echo "$user" | awk -F: '{print $2}')
     # Vérification si l'UID est supérieur à 100
     if [ "$uid" -gt 100 ]; then
-        echo "L'utilisateur $login a un UID supérieur à 100 : $uid"
+        echo "$login : $uid"
     fi
 done
-
 ```
 
 ##### Exercice 6 : Mon utilisateur existe t'il 
 Ecrire un script qui verifie si un utilisateur existe deja.
 - en fonction d’un login passe en parametres
 - en fonction d’un UID passe en parametres
-Si l’utilisateur existe renvoyer son UID `a l’affichage.
+Si l’utilisateur existe renvoyer son UID a l’affichage.
 Sinon ne rien renvoyer.
 
 ```shell
-#!/bin/bash
+#!/bin/sh
 
-# Verifie si un utilisateur existe deja, par son login
 check_user_by_login() {
     login="$1"
     uid=$(id -u "$login" 2>/dev/null)
     if [ -n "$uid" ]; then
         echo "L'utilisateur existe avec UID : $uid"
+        exit 1
     fi
 }
 
-# Verifie si un utilisateur existe deja, par son UID
 check_user_by_uid() {
     uid="$1"
     login=$(getent passwd "$uid" | cut -d: -f1)
     if [ -n "$login" ]; then
         echo "L'utilisateur existe avec UID : $uid"
+        exit 1
     fi
 }
 
-# Vérification du nombre de paramètres
 if [ "$#" -ne 2 ]; then
     echo "Utilisation : $0 [login|UID] [valeur]"
     exit 1
 fi
 
-# Affectation des paramètres
 check_type="$1"
 value="$2"
 
-# Vérification du type de vérification
 if [ "$check_type" = "login" ]; then
     check_user_by_login "$value"
 elif [ "$check_type" = "UID" ]; then
@@ -221,14 +218,14 @@ Il faudra repondre a une suite de question : voir man read
 ```shell
 #!/bin/bash
 
-# Appel de la fonction du script de vérification d'utilisateur
-check_user_by_login 
-
 # Vérification de l'utilisateur actuel (doit être root)
 if [ "$EUID" -ne 0 ]; then
     echo "Ce script doit être exécuté en tant qu'utilisateur root."
     exit 1
 fi
+
+fichier="6.user_exists.sh"
+source $fichier
 
 # Fonction pour vérifier si un répertoire home existe déjà
 check_home_directory() {
@@ -241,19 +238,21 @@ check_home_directory() {
     fi
 }
 
-# Demander des informations pour créer un nouvel utilisateur
+# Demander des informations pour la creation du nouvel utilisateur
 read -p "Login : " login
+check_user_by_login "$login"  # Vérifier si l'utilisateur existe déjà
 read -p "Nom : " nom
 read -p "Prénom : " prenom
 read -p "UID : " uid
+check_user_by_uid "$uid" # Vérifier si l'UID existe déjà
 read -p "GID : " gid
 read -p "Commentaires : " commentaires
 
-# Vérifier si l'utilisateur existe déjà
-if check_user_by_login "$login"; then
-    echo "L'utilisateur $login existe déjà. Veuillez choisir un autre login."
-    exit 1
-fi
+# # Vérifier si l'utilisateur existe déjà
+# if check_user_by_login "$login"; then
+#     echo "L'utilisateur $login existe déjà. Veuillez choisir un autre login."
+#     exit 1
+# fi
 
 # Vérifier si le répertoire home existe déjà
 if check_home_directory "$login"; then
@@ -263,7 +262,6 @@ if check_home_directory "$login"; then
 else
     echo "La création de l'utilisateur a été annulée en raison de la présence d'un répertoire home existant."
 fi
-
 ```   
 
 ##### Exercice 8 : Lecture au clavier
@@ -322,7 +320,6 @@ for file in "$directory"/*; do
         fi
     fi
 done
-
 ```   
 
 ##### Exercice 9 : Appréciation
@@ -346,18 +343,22 @@ while true; do
         exit 0
     fi
 
-    if ((note >= 16 && note <= 20)); then
-        echo "Très bien"
-    elif ((note >= 14 && note < 16)); then
-        echo "Bien"
-    elif ((note >= 12 && note < 14)); then
-        echo "Assez bien"
-    elif ((note >= 10 && note < 12)); then
-        echo "Moyen"
-    elif ((note < 10)); then
-        echo "Insuffisant"
+    if [[ $note =~ ^-?[0-9]+$ ]]; then
+        if ((note >= 16 && note <= 20)); then
+            echo "Très bien"
+        elif ((note >= 14 && note < 16)); then
+            echo "Bien"
+        elif ((note >= 12 && note < 14)); then
+            echo "Assez bien"
+        elif ((note >= 10 && note < 12)); then
+            echo "Moyen"
+        elif ((note < 10)); then
+            echo "Insuffisant"
+        else
+            echo "Note invalide. La note doit être entre 0 et 20."
+        fi
     else
-        echo "Note invalide. La note doit être entre 0 et 20."
+        echo "Veuillez entrer un entier."
     fi
 done
 ```   

@@ -30,11 +30,11 @@ check_user_by_uid "$uid" # Vérifier si l'UID existe déjà
 read -p "GID : " gid
 read -p "Commentaires : " commentaires
 
-# Vérifier si l'utilisateur existe déjà
-if check_user_by_login "$login"; then
-    echo "L'utilisateur $login existe déjà. Veuillez choisir un autre login."
-    exit 1
-fi
+# # Vérifier si l'utilisateur existe déjà
+# if check_user_by_login "$login"; then
+#     echo "L'utilisateur $login existe déjà. Veuillez choisir un autre login."
+#     exit 1
+# fi
 
 # Vérifier si le répertoire home existe déjà
 if check_home_directory "$login"; then
