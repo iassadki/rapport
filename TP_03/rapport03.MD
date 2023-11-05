@@ -14,11 +14,13 @@ script_name=$0
 param_3=$3
 param_list=("$@")
 
+# Affichage du texte
 echo "Bonjour, vous avez rentré $param_count paramètres."
 echo "Le nom du script est $script_name."
 echo "Le 3ème paramètre est $param_3."
 echo "Voici la liste des paramètres : ${param_list[@]}"
-```   
+```    
+
 
 ##### Exercice 2 : Vérification du nombre de paramètres
 Ecrivez un script concat.sh qui prend en parametre 2 mots et fait ce qui suit.
@@ -69,7 +71,13 @@ droits=$(stat -c "%A" "$fichier")
 
 echo "Le fichier $fichier est un $type, accessible par $USER en $droits"
 
-# manipuler l'output et remplacer l'output directory par repertoire
+
+# Manipuler ces outputs (repertoire - accessibilité - vide ou pas vide)
+# Le fichier /etc est un repertoire
+# "/etc" est accessible par root en lecture ecriture execution
+# Le fichier /etc/smb.conf est un fichier ordinaire qui n’est pas vide
+# "/etc/smb.conf" est accessible par jean en lecture.
+
 # sed -i 's/directory/répertoire/g' test-fichier.sh
 
 ```   
@@ -79,7 +87,7 @@ echo "Le fichier $fichier est un $type, accessible par $USER en $droits"
 Ecrire un script bash listedir.sh permettant d’afficher le contenu d’un repertoire en separant 
 les fichiers et les (sous) repertoires.
 Exemple d’utilisation :
-# $ ./listdir.sh /boot
+$ ./listdir.sh /boot
 % affichera :
 % ####### fichier dans /boot/
 % /boot/config-3.16.0-4-amd64
@@ -122,7 +130,7 @@ for subdir in "$directory"/*; do
 done
 ```   
 
-##### Exercice 4 : Lister les utilisateurs
+##### Exercice 5 : Lister les utilisateurs
 Ecrire un script bash affichant la liste des noms de login des utilisateurs définis dans /etc/passwd
 ayant un UID superieur a 100.
 Indication : for user in $(cat /etc/passwd); do echo $user; done permet preque de
@@ -147,7 +155,7 @@ done
 
 ```
 
-##### Exercice 5 : Mon utilisateur existe t'il 
+##### Exercice 6 : Mon utilisateur existe t'il 
 Ecrire un script qui verifie si un utilisateur existe deja.
 - en fonction d’un login passe en parametres
 - en fonction d’un UID passe en parametres
@@ -196,7 +204,7 @@ else
 fi
 ```   
 
-##### Exercice 6 : Création d'utilisateur
+##### Exercice 7 : Création d'utilisateur
 Ecrire un script pour creer un compte utilisateur voir : man useradd
 Utilisez votre script de verification d’existance d’utilisateur avant de creer.
 Il faudra verifier que l’utilisateur en cours d’execution est bien root voir echo $USER
@@ -258,7 +266,7 @@ fi
 
 ```   
 
-##### Exercice 7 : Lecture au clavier
+##### Exercice 8 : Lecture au clavier
 La commande bash read permet de lire une chaıne au clavier et de l’affecter a une variable.
 Essayer les commandes suivante :
 echo -n "Entrer votre nom: "
@@ -317,7 +325,7 @@ done
 
 ```   
 
-##### Exercice 8 : Appréciation
+##### Exercice 9 : Appréciation
 Creer un script qui demande a l’utilisateur de saisir une note et qui affiche un message en
 fonction de cette note :
 - “tres bien” si la note est entre 16 et 20 ;
